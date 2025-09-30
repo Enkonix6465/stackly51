@@ -434,7 +434,7 @@ const Home1 = () => {
         </div>
         {/* Statistics and Achievements Section */}
         <motion.section
-          className="py-16 px-4 md:px-8 bg-gradient-to-br from-white to-law-light"
+          className="py-16 px-4 md:px-8 dark:bg-black"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -443,7 +443,7 @@ const Home1 = () => {
           <div className="container mx-auto max-w-6xl">
             <div className="text-center mb-16">
               <h2 className="font-serif text-4xl md:text-5xl mb-6" style={{ color: '#25be85' }}>{t.excellenceTitle}</h2>
-              <p className="max-w-3xl mx-auto text-lg text-gray-600">
+              <p className="max-w-3xl mx-auto text-lg text-gray-600 dark:text-white">
                 {t.excellenceDesc}
               </p>
             </div>
@@ -464,7 +464,7 @@ const Home1 = () => {
               {t.stats.map((stat, idx) => (
                 <motion.div
                   key={idx}
-                  className="bg-white p-8 rounded-xl shadow-xl border-2"
+                  className="bg-white p-8 rounded-xl shadow-xl border-2 dark:bg-gray-900 text-center"
                   variants={{
                     hidden: { opacity: 0, scale: 0.8, y: 40 },
                     visible: { opacity: 1, scale: 1, y: 0 }
@@ -475,7 +475,7 @@ const Home1 = () => {
                   <div className="text-center">
                     <span className="stat-number text-4xl font-bold" style={{ color: '#25be85' }}>{stat.number}</span>
                     <h3 className="text-xl font-semibold mt-4" style={{ color: '#25be85' }}>{stat.label}</h3>
-                    <p className="text-gray-600 mt-2">{stat.desc}</p>
+                    <p className="text-gray-600 mt-2 dark:text-white">{stat.desc}</p>
                   </div>
                 </motion.div>
               ))}

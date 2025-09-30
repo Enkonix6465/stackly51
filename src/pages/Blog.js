@@ -358,8 +358,98 @@ const Blog = () => {
           ))}
         </div>
       </section>
+       <section className="w-full py-16 px-4 bg-[#25be85]/10  dark:bg-black relative overflow-hidden">
+        <div className="max-w-5xl mx-auto relative z-10">
+          <motion.h2
+            className="text-4xl md:text-5xl font-extrabold text-black dark:text-white text-center mb-8 drop-shadow-lg"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            {language === "ar"
+              ? "محطات بارزة في القانون"
+              : language === "he"
+              ? "אבני דרך בעולם המשפט"
+              : "Milestones in Law"}
+          </motion.h2>
+          <motion.p
+            className="text-lg text-black dark:text-white/90 mb-12 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            {language === "ar"
+              ? "تعرف على بعض المحطات الرئيسية التي شكلت عالم القانون الحديث."
+              : language === "he"
+              ? "הכירו כמה מהאירועים המרכזיים שעיצבו את עולם המשפט המודרני."
+              : "Explore some key events that have shaped the modern legal world."}
+          </motion.p>
+          <div className="relative">
+            <div className="absolute left-1/2 top-0 h-full w-1 bg-white/30 rounded-full -translate-x-1/2"></div>
+            <div className="flex flex-col gap-12">
+              {[
+                {
+                  year: "1215",
+                  title: language === "ar" ? "الميثاق الأعظم (Magna Carta)" : language === "he" ? "המגנה כרטה" : "Magna Carta",
+                  desc: language === "ar"
+                    ? "وثيقة تاريخية أرست مبدأ سيادة القانون وحدت من سلطة الملك."
+                    : language === "he"
+                    ? "מסמך היסטורי שהניח את עקרון שלטון החוק והגביל את כוח המלך."
+                    : "A historic document establishing the principle of rule of law and limiting royal power."
+                },
+                {
+                  year: "1789",
+                  title: language === "ar" ? "إعلان حقوق الإنسان" : language === "he" ? "הצהרת זכויות האדם" : "Declaration of the Rights of Man",
+                  desc: language === "ar"
+                    ? "وضع أسس الحقوق والحريات الأساسية في فرنسا والعالم."
+                    : language === "he"
+                    ? "הניח את היסודות לזכויות וחירויות בסיסיות בצרפת ובעולם."
+                    : "Laid the foundation for basic rights and freedoms in France and beyond."
+                },
+                {
+                  year: "1948",
+                  title: language === "ar" ? "الإعلان العالمي لحقوق الإنسان" : language === "he" ? "ההכרזה לכל באי עולם בדבר זכויות האדם" : "Universal Declaration of Human Rights",
+                  desc: language === "ar"
+                    ? "وثيقة أممية تضمن الحقوق الأساسية لكل إنسان."
+                    : language === "he"
+                    ? "מסמך בינלאומי המבטיח זכויות יסוד לכל אדם."
+                    : "A global document guaranteeing fundamental rights for all people."
+                },
+                {
+                  year: "2025",
+                  title: language === "ar" ? "التحول الرقمي في القانون" : language === "he" ? "המהפכה הדיגיטלית במשפט" : "Digital Transformation in Law",
+                  desc: language === "ar"
+                    ? "التقنيات الحديثة تعيد تشكيل الممارسة القانونية حول العالم."
+                    : language === "he"
+                    ? "טכנולוגיות חדשות משנות את עולם המשפט ברחבי העולם."
+                    : "Modern technologies are reshaping legal practice worldwide."
+                }
+              ].map((item, idx) => (
+                <motion.div
+                  key={item.year}
+                  className={`relative flex items-center gap-8 ${idx % 2 === 0 ? "flex-row" : "flex-row-reverse"}`}
+                  initial={{ opacity: 0, x: idx % 2 === 0 ? -60 : 60 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.7, delay: idx * 0.2 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="w-24 h-24 rounded-full bg-white flex flex-col items-center justify-center shadow-xl border-4 border-[#25be85] z-10">
+                    <span className="text-2xl font-bold text-[#25be85]">{item.year}</span>
+                  </div>
+                  <div className="bg-white/90 dark:bg-[#23272b] rounded-xl shadow-lg p-6 border border-[#25be85] max-w-md">
+                    <h3 className="font-bold text-xl text-[#181818] dark:text-white mb-2">{item.title}</h3>
+                    <p className="text-gray-700 dark:text-gray-200">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
       {/* Section 2: Filterable Blog Grid */}
-      <div className="mb-16">
+      <div className=" bg-white dark:bg-black px-4 mt-10 pb-10 pr-10">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-2xl font-bold text-black dark:text-white pb-2 border-b-2 border-[#25be85] inline-block">{t.latestTitle}</h2>
           <div className="flex space-x-2">
@@ -376,7 +466,7 @@ const Blog = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredPosts.map(post => (
-            <div key={post.id} className="bg-white dark:bg-black rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 border-2 border-[#25be85]">
+            <div key={post.id} className="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 border-2 border-[#25be85]">
               <div className="relative">
                 <img className="h-48 w-full object-cover" src={post.image} alt={post.title} />
                 <div className="absolute top-4 right-4">
@@ -405,7 +495,7 @@ const Blog = () => {
         </div>
       </div>
       {/* CTA Section - End of Page */}
-      <section className="w-full py-16 px-4 bg-[#25be85] flex flex-col items-center justify-center">
+      <section className="w-full py-5 mb-0 bg-[#25be85] flex flex-col items-center justify-center dark:bg-black">
         <div className="max-w-2xl w-full mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4">{t.ctaTitle}</h2>
           <p className="text-lg text-white/90 mb-8">
@@ -416,6 +506,9 @@ const Blog = () => {
           </button>
         </div>
       </section>
+
+
+     
     </div>
   );
 };

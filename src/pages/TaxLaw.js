@@ -227,7 +227,7 @@ function TaxLaw() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: idx * 0.2 }}
             viewport={{ once: true }}
-            className="bg-[#25be85] text-white dark:bg-white text-white dark:text-black font-bold text-lg rounded-xl p-6 shadow-lg flex items-center justify-center text-center border-2 border-[#25be85]"
+            className="bg-[#25be85] text-white  text-white  font-bold text-lg rounded-xl p-6 shadow-lg flex items-center justify-center text-center border-2 border-[#25be85]"
           >
             {feature}
           </motion.div>
@@ -243,11 +243,15 @@ function TaxLaw() {
     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 gap-8 max-w-7xl mx-auto">
       {t.processSteps.map((step, idx) => (
         <div key={step.title} className="flex flex-col items-center text-center">
-          <div className={`w-16 h-16 rounded-full flex flex-col items-center justify-center mb-4 ${idx % 2 === 0 ? 'bg-[#25be85]' : 'bg-black'}`}>
-            <span className="text-lg font-bold text-white">{String(idx+1).padStart(2, '0')}</span>
-            <svg className="w-5 h-5 text-white mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="10" />
-            </svg>
+          {/* Circle with white border, no inner circle */}
+          <div
+            className="w-16 h-16 rounded-full flex items-center justify-center mb-4"
+            style={{
+              backgroundColor: idx % 2 === 0 ? '#25be85' : 'black',
+              border: '3px solid #fff'
+            }}
+          >
+            <span className="text-xl font-bold text-white">{String(idx+1).padStart(2, '0')}</span>
           </div>
           <h3 className="font-bold text-black dark:text-white mb-2">{step.title}</h3>
           <p className="text-black/80 dark:text-white/80 text-sm">{step.desc}</p>

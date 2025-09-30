@@ -120,7 +120,7 @@ const Blog1 = () => {
   const t = translations[language] || translations.en;
 
   return (
-    <main className="min-h-screen bg-white dark:bg-black">
+    <main className="min-h-screen bg-white dark:bg-black mt-10">
       {/* Section 1: Key Challenges in Complex Litigation */}
       <section className="w-full py-16 px-4 bg-white dark:bg-black">
         <div className="max-w-5xl mx-auto text-center">

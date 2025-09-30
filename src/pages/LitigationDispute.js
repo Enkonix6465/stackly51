@@ -22,7 +22,7 @@ const translations = {
     processTitle: "How Our Litigation & Dispute Process Works",
     processDesc: "A step-by-step guide to our approach for resolving litigation and dispute matters with clarity and expertise.",
     processSteps: [
-      { title: "Case Evaluation", desc: "We assess your case details and objectives to determine the best legal strategy." },
+      { title: "Case Evaluation", desc: "We assess your case details and goals to determine the best legal strategy." },
       { title: "Evidence Review", desc: "All relevant documents and evidence are analyzed to build a strong case." },
       { title: "Strategy Planning", desc: "We develop a tailored litigation or dispute resolution strategy for your needs." },
       { title: "Filing & Communication", desc: "All filings are handled and you are kept informed at every stage." },
@@ -228,7 +228,7 @@ function LitigationDispute() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: idx * 0.2 }}
             viewport={{ once: true }}
-            className="bg-[#25be85] text-white dark:bg-white text-white dark:text-black font-bold text-lg rounded-xl p-6 shadow-lg flex items-center justify-center text-center border-2 border-[#25be85]"
+            className="bg-[#25be85] text-white  text-white  font-bold text-lg rounded-xl p-6 shadow-lg flex items-center justify-center text-center border-2 border-[#25be85]"
           >
             {feature}
           </motion.div>
@@ -244,12 +244,8 @@ function LitigationDispute() {
     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-7 gap-8 max-w-7xl mx-auto">
       {t.processSteps.map((step, idx) => (
         <div key={step.title} className="flex flex-col items-center text-center">
-          {/* Keep icons as is, only change text */}
-          <div className={`w-16 h-16 rounded-full flex flex-col items-center justify-center mb-4 ${idx % 2 === 0 ? 'bg-[#25be85]' : 'bg-black'}`}>
+          <div className={`w-16 h-16 rounded-full flex items-center justify-center mb-4 ${idx % 2 === 0 ? 'bg-[#25be85]' : 'bg-black'}`}>
             <span className="text-lg font-bold text-white">{String(idx+1).padStart(2, '0')}</span>
-            <svg className="w-5 h-5 text-white mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <circle cx="12" cy="12" r="10" />
-            </svg>
           </div>
           <h3 className="font-bold text-black dark:text-white mb-2">{step.title}</h3>
           <p className="text-black/80 dark:text-white/80 text-sm">{step.desc}</p>
