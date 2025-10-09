@@ -12,12 +12,12 @@ const translations = {
     heroDesc: "Our litigation team steps into the fray with unwavering confidence and a track record of success.",
     whyTitle: "Why Choose Us for Litigation & Dispute Resolution?",
     litigationFeatures: [
-      "Experienced litigation attorneys",
+      "Well Experienced litigation attorneys are thoroughly prepared",
       "Strategic approach to dispute resolution",
       "Support through every stage of the legal process",
       "Proven track record in complex cases",
-      "Client-focused advocacy",
-      "Skilled negotiation and mediation"
+      "Client-focused advocacy your goals, our priority, always",
+      "Skilled negotiation and mediation to resolve disputes effectively"
     ],
     processTitle: "How Our Litigation & Dispute Process Works",
     processDesc: "A step-by-step guide to our approach for resolving litigation and dispute matters with clarity and expertise.",
@@ -25,10 +25,10 @@ const translations = {
       { title: "Case Evaluation", desc: "We assess your case details and goals to determine the best legal strategy." },
       { title: "Evidence Review", desc: "All relevant documents and evidence are analyzed to build a strong case." },
       { title: "Strategy Planning", desc: "We develop a tailored litigation or dispute resolution strategy for your needs." },
-      { title: "Filing & Communication", desc: "All filings are handled and you are kept informed at every stage." },
+      { title: "Filing", desc: "All filings are handled and you are kept informed at every stage for clarity." },
       { title: "Negotiation", desc: "We pursue amicable solutions through negotiation and mediation." },
-      { title: "Court Representation", desc: "Strong advocacy and representation in court if needed." },
-      { title: "Resolution & Support", desc: "Achieve resolution and ongoing support for your future." }
+      { title: "Representation", desc: "Strong advocacy and representation in court if needed to prove the case." },
+      { title: "Resolution", desc: "Achieve resolution and ongoing support for your future." }
     ],
     servicesTitle: "Our Litigation & Dispute Services",
     services: [

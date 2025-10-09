@@ -120,9 +120,9 @@ const Footer = () => {
 
   return (
     <footer className="bg-white text-black dark:bg-black py-12 px-5 md:px-8 font-sans">
-      <div className="max-w-7xl mx-auto flex flex-wrap justify-between gap-8 md:gap-10">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-10">
         {/* Logo and About */}
-        <div className="flex-1 min-w-[200px] px-5 md:px-8">
+        <div className="flex flex-col items-start">
           <img 
             src={logo}
             alt="Stackly Logo" 
@@ -133,7 +133,7 @@ const Footer = () => {
           </p>
         </div>
         {/* Quick Links */}
-        <div className="flex-1 min-w-[200px] px-5 md:px-8">
+        <div>
           <h4 className="text-base font-medium mb-3 text-black dark:text-gray-300">{t.quickLinks}</h4>
           <ul className="list-none p-0 m-0">
             <li className="mb-2"><Link to="/home1" className="text-black dark:text-white hover:text-[#25be85] dark:hover:text-[#25be85] transition-colors no-underline">{t.home}</Link></li>
@@ -144,7 +144,7 @@ const Footer = () => {
           </ul>
         </div>
         {/* Services */}
-        <div className="flex-1 min-w-[200px] px-5">
+        <div>
           <h4 className="text-base font-medium mb-3 text-black dark:text-gray-300">{t.servicesTitle}</h4>
           <ul className="list-none p-0 m-0">
             <li className="mb-2"><Link to="/litigation-dispute" className="text-black dark:text-white hover:text-[#25be85] dark:hover:text-[#25be85] transition-colors no-underline">{t.LitigationDispute}</Link></li>
@@ -156,7 +156,7 @@ const Footer = () => {
           </ul>
         </div>
         {/* Social & Contact */}
-        <div className="flex-1 min-w-[200px] px-5">
+        <div>
           <h4 className="text-base font-medium mb-3 text-black dark:text-gray-300">{t.connect}</h4>
           <div className="flex gap-4 mb-4">
             <a
@@ -164,7 +164,6 @@ const Footer = () => {
               aria-label="LinkedIn"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-500 dark:text-gray-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
             >
               <img
                 src={linkedin}
@@ -177,7 +176,6 @@ const Footer = () => {
               aria-label="Twitter"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-500 dark:text-gray-400 hover:text-blue-400 dark:hover:text-blue-300 transition-colors"
             >
               <img
                 src={twitter}
@@ -190,7 +188,6 @@ const Footer = () => {
               aria-label="Facebook"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors"
             >
               <img
                 src={facebook}
@@ -203,7 +200,6 @@ const Footer = () => {
               aria-label="Gmail"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-500 dark:text-gray-400 hover:text-red-500 dark:hover:text-blue-300 transition-colors"
             >
               <img
                 src={gmail}

@@ -12,6 +12,7 @@ const translations = {
     blog: "Blog",
     contact: "Contact Us",
     logout: "Logout",
+    dashboard: "Dashboard",
   },
   ar: {
     home: "الرئيسية",
@@ -20,6 +21,7 @@ const translations = {
     blog: "مدونة",
     contact: "اتصل بنا",
     logout: "تسجيل خروج",
+    dashboard: "لوحة التحكم",
   },
   he: {
     home: "בית",
@@ -28,6 +30,7 @@ const translations = {
     blog: "בלוג",
     contact: "צור קשר",
     logout: "התנתק",
+    dashboard: "לוח בקרה",
   },
 };
 
@@ -76,10 +79,11 @@ const Header = ({ toggleTheme, isDark }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Responsive nav close
+  // Responsive nav close - updated for tablet view
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 768 && mobileNavOpen) {
+      // Close mobile nav only on large screens (1024px and above)
+      if (window.innerWidth >= 1024 && mobileNavOpen) {
         setMobileNavOpen(false);
       }
     };
@@ -131,6 +135,7 @@ const Header = ({ toggleTheme, isDark }) => {
       return "services";
     if (location.pathname === "/blog") return "blog";
     if (location.pathname === "/contact") return "contact";
+    if (location.pathname === "/admin") return "dashboard";
     return "";
   };
 
@@ -144,6 +149,11 @@ const Header = ({ toggleTheme, isDark }) => {
     navigate("/welcome");
   };
 
+  const handleDashboardClick = () => {
+    setAvatarDropdownOpen(false);
+    navigate("/admin");
+  };
+
   const toggleMobileNav = () => setMobileNavOpen((prev) => !prev);
 
   return (
@@ -155,22 +165,11 @@ const Header = ({ toggleTheme, isDark }) => {
         </Link>
       </nav>
 
-      {/* Hamburger (mobile only) */}
-      <button
-        className={`md:hidden flex flex-col gap-1.5 ${mobileNavOpen ? "open" : ""}`}
-        aria-label="Toggle menu"
-        onClick={toggleMobileNav}
-      >
-        <span className="w-6 h-0.5 bg-current transition-all"></span>
-        <span className="w-6 h-0.5 bg-current transition-all"></span>
-        <span className="w-6 h-0.5 bg-current transition-all"></span>
-      </button>
-
-      {/* Nav Links */}
+      {/* Nav Links - Hidden on mobile and tablet, visible only on large screens */}
       <nav
         className={`${
           mobileNavOpen ? "flex" : "hidden"
-        } md:flex flex-col md:flex-row md:items-center md:gap-8 absolute md:static top-16 left-0 w-full md:w-auto bg-white dark:bg-black md:bg-transparent px-6 py-4 md:p-0 shadow md:shadow-none`}
+        } lg:flex flex-col lg:flex-row lg:items-center lg:gap-8 absolute lg:static top-16 left-0 w-full lg:w-auto bg-white dark:bg-black lg:bg-transparent px-6 py-4 lg:p-0 shadow lg:shadow-none`}
       >
         {/* Home */}
         <div className="relative">
@@ -284,8 +283,8 @@ const Header = ({ toggleTheme, isDark }) => {
       </nav>
 
       {/* Right Section */}
-      <div className="flex items-center gap-4">
-        {/* Language Dropdown - left of theme toggle */}
+      <div className="flex items-center gap-4 relative w-auto">
+        {/* Language Dropdown */}
         <select
           value={language}
           onChange={e => setLanguage(e.target.value)}
@@ -295,7 +294,7 @@ const Header = ({ toggleTheme, isDark }) => {
           <option value="ar">العربية</option>
           <option value="he">עברית</option>
         </select>
-        {/* Theme Toggle with images */}
+        {/* Theme Toggle */}
         <button onClick={toggleTheme} className="w-8 h-8">
           <img
             src={isDark ? sun : moon}
@@ -304,15 +303,22 @@ const Header = ({ toggleTheme, isDark }) => {
           />
         </button>
         {/* Avatar */}
-        <div ref={avatarRef} className="relative">
+        <div ref={avatarRef} className="relative z-10">
           <div
-            className="w-10 h-10  text-white flex items-center justify-center rounded-full font-bold cursor-pointer"style={{ backgroundColor: "#25be85" }}
+            className="w-10 h-10 text-white flex items-center justify-center rounded-full font-bold cursor-pointer"
+            style={{ backgroundColor: "#25be85" }}
             onClick={toggleAvatarDropdown}
           >
             {initials || "AD"}
           </div>
           {avatarDropdownOpen && (
             <div className="absolute right-0 mt-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded shadow-md min-w-[120px] z-50">
+              <button
+                onClick={handleDashboardClick}
+                className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700 border-b border-gray-200 dark:border-gray-600"
+              >
+                {translations[language].dashboard}
+              </button>
               <button
                 onClick={handleLogout}
                 className="w-full px-4 py-2 text-left text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
@@ -321,6 +327,18 @@ const Header = ({ toggleTheme, isDark }) => {
               </button>
             </div>
           )}
+        </div>
+        {/* Hamburger (mobile and tablet only) - visible on screens smaller than 1024px */}
+        <div className="flex-1 flex justify-end items-center lg:hidden">
+          <button
+            className="flex flex-col gap-1.5 ml-2"
+            aria-label="Toggle menu"
+            onClick={toggleMobileNav}
+          >
+            <span className="w-6 h-0.5 bg-black dark:bg-white block mb-1 rounded"></span>
+            <span className="w-6 h-0.5 bg-black dark:bg-white block mb-1 rounded"></span>
+            <span className="w-6 h-0.5 bg-black dark:bg-white block rounded"></span>
+          </button>
         </div>
       </div>
     </header>

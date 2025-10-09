@@ -12,23 +12,23 @@ const translations = {
     heroDesc: "Our experienced legal team provides expert guidance, strategic business advice, and unwavering commitment.",
     whyTitle: "Why Choose Us for Corporate & Commercial Law?",
     features: [
-      "Expert corporate law advisors",
-      "Business-focused legal strategies",
+      "Expert,trusted corporate law advisors",
+      "Business-focused,innovative legal strategies",
       "Support for mergers, acquisitions, and restructuring",
       "Proven success in complex transactions",
-      "Client-centric commercial solutions",
+      "Proven Client-centric commercial solutions",
       "Skilled contract negotiation & drafting"
     ],
     processTitle: "How Our Corporate & Commercial Law Process Works",
     processDesc: "A step-by-step guide to our approach for supporting your business with clarity and expertise.",
     processSteps: [
-      { title: "Business Needs Assessment", desc: "We assess your business goals and legal requirements to determine the best strategy." },
+      { title: "Business Needs Assessment", desc: "We assess your business goals and legal requirements to determine the best." },
       { title: "Due Diligence & Review", desc: "All relevant documents and contracts are analyzed to protect your interests." },
-      { title: "Strategic Planning", desc: "We develop tailored legal strategies for transactions, compliance, and growth." },
+      { title: "Strategic and  Planning", desc: "We develop tailored legal strategies for transactions, compliance, and growth." },
       { title: "Documentation & Communication", desc: "All legal documentation is handled and you are kept informed at every stage." },
       { title: "Negotiation & Transaction", desc: "We pursue favorable outcomes through skilled negotiation and transaction support." },
-      { title: "Regulatory Compliance", desc: "Ensuring your business meets all legal and regulatory requirements." },
-      { title: "Ongoing Support & Growth", desc: "Achieve business growth and ongoing legal support for your future." }
+      { title: "Regulatory Compliance", desc: "Ensuring your business meets all legal and regulatory requirements compliance." },
+      { title: "Ongoing Support & Growth", desc: "We must achieve business growth and ongoing legal support for your future." }
     ],
     servicesTitle: "Our Corporate & Commercial Law Services",
     services: [

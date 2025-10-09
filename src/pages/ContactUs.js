@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 const translations = {
   en: {
     heroTitle: "Get In Touch with US",
-    heroDesc: "Friendly and welcoming, used by brands like Unbounce to make visitors feel valued and at ease.",
+    heroDesc: "Reach out to our legal team for trusted advice, support, and prompt assistance. We are here to help you with all your law-related queries.",
     formTitle: "Get In Touch With Us",
     name: "Name",
     email: "Email",
@@ -352,7 +352,7 @@ function ContactUs() {
             <img
               src={map}
               alt="Company Location Map"
-              className="w-full h-[400px] object-cover rounded-2xl shadow-xl border border-[#25be85] dark:border-[#25be85]"
+              className="w-full h-[280px] object-cover rounded-2xl shadow-xl border border-[#25be85] dark:border-[#25be85]"
             />
           </div>
         </div>

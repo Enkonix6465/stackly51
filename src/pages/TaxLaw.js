@@ -12,23 +12,23 @@ const translations = {
     heroDesc: "Our experienced tax attorneys provide expert guidance, strategic planning, and unwavering commitment to compliance and savings for individuals and businesses alike.",
     whyTitle: "Why Choose Us for Tax Law?",
     taxFeatures: [
-      "Experienced tax law attorneys",
+      "Well Experienced litigation attorneys are thoroughly prepared",
       "Strategic tax planning and compliance",
       "Support through every stage of tax matters",
       "Proven track record in complex tax cases",
-      "Client-focused tax solutions",
+      "Client-focused advocacy your goals, our priority, always",
       "Skilled negotiation with tax authorities"
     ],
     processTitle: "How Our Tax Law Process Works",
     processDesc: "A step-by-step guide to our approach for resolving tax matters with clarity and expertise.",
     processSteps: [
-      { title: "Tax Assessment", desc: "We assess your tax situation and objectives to determine the best strategy." },
-      { title: "Document Review", desc: "All relevant tax documents and filings are analyzed to protect your interests." },
-      { title: "Strategy Planning", desc: "We develop a tailored tax strategy for compliance, savings, or dispute resolution." },
-      { title: "Documentation & Communication", desc: "All filings and communications are handled and you are kept informed at every stage." },
+      { title: " Access Tax Assessment", desc: "We assess your tax situation and objectives to determine the best strategy." },
+      { title: "Documentation Review", desc: "All relevant tax documents and filings are analyzed to protect your interests." },
+      { title: "Strategy and Planning", desc: "We develop a tailored tax strategy for compliance, savings, or dispute resolution." },
+      { title: "Documentation & Communication", desc: "All filings and communications are handled and you are informed at every stage." },
       { title: "Negotiation & Resolution", desc: "We pursue favorable outcomes through skilled negotiation and dispute resolution." },
-      { title: "Tax Dispute Representation", desc: "Strong advocacy and representation in tax disputes and litigation." },
-      { title: "Resolution & Support", desc: "Achieve resolution and ongoing support for your tax needs." }
+      { title: "Tax Dispute Representation", desc: "Strong advocacy and representation in tax disputes and litigation law." },
+      { title: "Resolution & Support", desc: "We must achieve resolution and ongoing support for your tax needs." }
     ],
     servicesTitle: "Our Tax Law Services",
     services: [

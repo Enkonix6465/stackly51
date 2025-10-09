@@ -21,10 +21,10 @@ const translations = {
     processTitle: "How Our International Law Process Works",
     processDesc: "A step-by-step guide to our approach for resolving international law matters with clarity and expertise.",
     processSteps: [
-      { title: "Global Needs Assessment", desc: "We assess your international legal needs and objectives to determine the best strategy." },
+      { title: "Global Needs Assessment", desc: "We assess your international legal needs and objectives to determine the strategy." },
       { title: "Document Review & Due Diligence", desc: "All relevant international documents and contracts are analyzed to protect your interests." },
-      { title: "Strategy Planning", desc: "We develop tailored legal strategies for cross-border transactions, compliance, and disputes." },
-      { title: "Documentation & Communication", desc: "All filings and communications are handled and you are kept informed at every stage." },
+      { title: "Strategy and Planning", desc: "We develop tailored legal strategies for cross-border transactions, compliance, disputes." },
+      { title: "Documentation & Communication", desc: "All filings and communications are handled and you are informed every stage." },
       { title: "Negotiation & Transaction", desc: "We pursue favorable outcomes through skilled negotiation and transaction support." },
       { title: "International Dispute Resolution", desc: "Strong advocacy and representation in international disputes and litigation." },
       { title: "Resolution & Support", desc: "Achieve resolution and ongoing support for your international legal needs." }

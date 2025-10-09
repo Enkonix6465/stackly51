@@ -1,94 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { Bar } from 'react-chartjs-2';
+
+
+
+import { Bar, Pie } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
   BarElement,
+  ArcElement,
   Title,
   Tooltip,
   Legend,
 } from 'chart.js';
-import { useLocation } from "react-router-dom";
 
-// Register ChartJS components
 ChartJS.register(
   CategoryScale,
   LinearScale,
   BarElement,
+  ArcElement,
   Title,
   Tooltip,
   Legend
 );
+// Register ChartJS components
 
-const LoginBarChart = ({ loginData, setLoginData }) => {
-  // Function to simulate a login (for demonstration)
-  const simulateLogin = () => {
-    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    const today = days[new Date().getDay()];
 
-    setLoginData(prevData => ({
-      ...prevData,
-      [today]: prevData[today] + 1
-    }));
-  };
 
-  // Chart configuration
-  const chartData = {
-    labels: Object.keys(loginData),
-    datasets: [
-      {
-        label: 'Number of Logins',
-        data: Object.values(loginData),
-        backgroundColor: 'rgba(59, 130, 246, 0.8)',
-        borderColor: 'rgba(59, 130, 246, 1)',
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const chartOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-      },
-      title: {
-        display: true,
-        text: 'User Logins by Day of the Week',
-      },
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-        ticks: {
-          stepSize: 1,
-        },
-      },
-    },
-  };
-
-  return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">Login Analytics</h2>
-      <div className="h-80">
-        <Bar data={chartData} options={chartOptions} />
-      </div>
-      <div className="mt-6">
-        <button
-          onClick={simulateLogin}
-          className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md transition-colors"
-        >
-          Simulate Login (Demo)
-        </button>
-      </div>
-      <div className="mt-4 text-sm text-gray-600">
-        <p>This chart displays login data stored in your browser's local storage.</p>
-        <p>Click the button to simulate a login for the current day.</p>
-      </div>
-    </div>
-  );
-};
 
 const translations = {
   en: {
@@ -121,16 +59,22 @@ const translations = {
 };
 
 const AdminDashboard = () => {
-  const [loginData, setLoginData] = useState({
-    Sunday: 0,
-    Monday: 0,
-    Tuesday: 0,
-    Wednesday: 0,
-    Thursday: 0,
-    Friday: 0,
-    Saturday: 0
+  const [loginData, setLoginData] = useState(() => {
+    // Always use localStorage data on initial load
+    const stored = localStorage.getItem('loginData');
+    if (stored) return JSON.parse(stored);
+    return {
+      Sunday: 0,
+      Monday: 0,
+      Tuesday: 0,
+      Wednesday: 0,
+      Thursday: 0,
+      Friday: 0,
+      Saturday: 0
+    };
   });
-  
+  const [userStatus, setUserStatus] = useState({ active: 0, inactive: 0 });
+
   const [logins, setLogins] = useState([]);
   const [stats, setStats] = useState({ totalUsers: 0, loginsToday: 0 });
   const [recentLogins, setRecentLogins] = useState([]);
@@ -140,14 +84,6 @@ const AdminDashboard = () => {
   const [isDark, setIsDark] = useState(localStorage.getItem("theme") === "dark");
  
   const t = translations[language] || translations["en"];
-
-  // Initialize chart data from localStorage
-  useEffect(() => {
-    const storedData = localStorage.getItem('loginData');
-    if (storedData) {
-      setLoginData(JSON.parse(storedData));
-    }
-  }, []);
 
   // Update localStorage when loginData changes
   useEffect(() => {
@@ -257,6 +193,121 @@ const AdminDashboard = () => {
     };
   }, []);
 
+  useEffect(() => {
+    // --- Bar Chart: Calculate logins per day from userLogins ---
+    const userLogins = JSON.parse(localStorage.getItem("userLogins")) || {};
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    // userLogins: { email: timestamp }
+    const dayCounts = {
+      Sunday: 0,
+      Monday: 0,
+      Tuesday: 0,
+      Wednesday: 0,
+      Thursday: 0,
+      Friday: 0,
+      Saturday: 0
+    };
+    Object.values(userLogins).forEach(ts => {
+      const d = new Date(ts);
+      const day = d.toLocaleDateString('en-US', { weekday: 'long' });
+      if (dayCounts[day] !== undefined) dayCounts[day]++;
+    });
+    setLoginData(dayCounts);
+
+    // --- Pie Chart: Calculate active/inactive users ---
+    let active = 0, inactive = 0;
+    users.forEach(u => {
+      if (u.isActive) active++;
+      else inactive++;
+    });
+    setUserStatus({ active, inactive });
+  }, []);
+
+  // Bar chart config (Daily Logins from localStorage)
+const barData = {
+  labels: Object.keys(loginData),
+  datasets: [
+    {
+      label: 'Logins',
+      data: Object.values(loginData),
+      backgroundColor: 'rgba(37,190,133,0.7)',
+      borderColor: '#25be85',
+      borderWidth: 2,
+      borderRadius: 8,
+      maxBarThickness: 40,
+    },
+  ],
+};
+const barOptions = {
+  responsive: true,
+  plugins: {
+    legend: { display: false },
+    title: {
+      display: true,
+      text: 'Daily Login Statistics',
+      color: '#25be85',
+      font: { size: 20, weight: 'bold' }
+    },
+    tooltip: {
+      backgroundColor: '#25be85',
+      titleColor: '#fff',
+      bodyColor: '#fff',
+      borderColor: '#fff',
+      borderWidth: 2,
+    }
+  },
+  scales: {
+    x: {
+      grid: { display: false },
+      ticks: { color: '#181818', font: { size: 14, weight: 'bold' } }
+    },
+    y: {
+      beginAtZero: true,
+      grid: { color: '#e5e7eb' },
+      ticks: { color: '#181818', font: { size: 14 } }
+    },
+  },
+};
+
+  // Pie chart config (User Status from localStorage)
+const pieData = {
+  labels: ['Active Users', 'Inactive Users'],
+  datasets: [
+    {
+      data: [userStatus.active, userStatus.inactive],
+      backgroundColor: ['#7c83f6', '#25be85'],
+      borderColor: ['#fff', '#fff'],
+      borderWidth: 3,
+      hoverOffset: 12,
+    },
+  ],
+};
+const pieOptions = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: 'bottom',
+      labels: {
+        color: '#181818',
+        font: { size: 16, weight: 'bold' }
+      }
+    },
+    title: {
+      display: true,
+      text: 'User Status',
+      color: '#25be85',
+      font: { size: 20, weight: 'bold' }
+    },
+    tooltip: {
+      backgroundColor: '#25be85',
+      titleColor: '#fff',
+      bodyColor: '#fff',
+      borderColor: '#fff',
+      borderWidth: 2,
+    }
+  },
+};
+
   // Add dark mode classes to main container and tables
   return (
     <div className={`w-full min-h-screen p-8 pt-24 transition-colors duration-300   dark:bg-black dark:text-white`}>
@@ -264,37 +315,37 @@ const AdminDashboard = () => {
         <h1 className="text-4xl font-extrabold text-[#25be85] dark:text-[#25be85] text-center mb-6 drop-shadow-lg dark:text-white">Admin Dashboard</h1>
       </div>
       {/* Section 1: Logins Table */}
-  <section className="w-full mb-10 dark:bg-black dark:text-white">
-        <h2 className="text-2xl font-bold mb-4">User Logins</h2>
-        <div className="overflow-x-auto">
-          <table className={`w-full rounded-lg shadow text-left ${isDark ? "bg-black text-white" : "bg-white text-black"}`}>
-            <thead className={isDark ? "bg-[#25be85] text-white" : "bg-[#25be85] text-white"}>
-              <tr>
-                <th className="py-3 px-4">Username</th>
-                <th className="py-3 px-4">Email</th>
-                <th className="py-3 px-4">Login Time</th>
-              </tr>
-            </thead>
-            <tbody>
-              {logins.length === 0 ? (
-                <tr>
-                  <td colSpan={3} className="py-4 px-4 text-center text-[#25be85]">{isDark ? <span className="text-white">No logins found.</span> : "No logins found."}</td>
-                </tr>
-              ) : (
-                logins.map((row, idx) => (
-                  <tr key={idx} className="border-b last:border-none">
-                    <td className="py-3 px-4">{row.username}</td>
-                    <td className="py-3 px-4">{row.email}</td>
-                    <td className="py-3 px-4">{row.loginTime}</td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
-      </section>
-      
-      {/* Section 2: User Statistics */}
+<section className="w-full mb-10 dark:bg-black dark:text-white">
+  <h2 className="text-2xl font-bold mb-4">User Logins</h2>
+  <div className="overflow-x-auto">
+    <table className={`w-full rounded-lg shadow text-left ${isDark ? "bg-black text-white" : "bg-white text-black"}`}>
+      <thead>
+        <tr className="bg-[#25be85] text-white">
+          <th className="py-3 px-4 font-semibold text-left">Username</th>
+          <th className="py-3 px-4 font-semibold text-left">Email</th>
+          <th className="py-3 px-4 font-semibold text-left">Login Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {logins.length === 0 ? (
+          <tr>
+            <td colSpan={3} className="py-4 px-4 text-center text-[#25be85]">{isDark ? <span className="text-white">No logins found.</span> : "No logins found."}</td>
+          </tr>
+        ) : (
+          logins.map((row, idx) => (
+            <tr key={idx} className="border-b last:border-none">
+              <td className="py-3 px-4">{row.username}</td>
+              <td className="py-3 px-4">{row.email}</td>
+              <td className="py-3 px-4">{row.loginTime}</td>
+            </tr>
+          ))
+        )}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+{/* Section 2: User Statistics */}
   <section className="w-full mb-10 dark:bg-black dark:text-white">
         <h2 className="text-2xl font-bold mb-4">User Statistics</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -311,123 +362,75 @@ const AdminDashboard = () => {
 
       {/* Section 3: Recent Logins */}
   <section className="w-full mb-10 dark:bg-black dark:text-white">
-        <h2 className="text-2xl font-bold mb-4">Recent Logins</h2>
-        <div className="overflow-x-auto">
-          <table className={`w-full rounded-lg shadow text-left ${isDark ? "bg-black text-white" : "bg-white text-black"}`}>
-            <thead className={isDark ? "bg-[#25be85] text-white" : "bg-[#25be85] text-white"}>
-              <tr>
-                <th className="py-3 px-4">Username</th>
-                <th className="py-3 px-4">Email</th>
-                <th className="py-3 px-4">Login Time</th>
-              </tr>
-            </thead>
-            <tbody>
-              {recentLogins.length === 0 ? (
-                <tr>
-                  <td colSpan={3} className="py-4 px-4 text-center text-[#25be85]">{isDark ? <span className="text-white">No recent logins found.</span> : "No recent logins found."}</td>
-                </tr>
-              ) : (
-                recentLogins.map((row, idx) => (
-                  <tr key={idx} className="border-b last:border-none">
-                    <td className="py-3 px-4">{row.username}</td>
-                    <td className="py-3 px-4">{row.email}</td>
-                    <td className="py-3 px-4">{row.loginTime}</td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
-      </section>
+  <h2 className="text-2xl font-bold mb-4">Recent Logins</h2>
+  <div className="overflow-x-auto">
+    <table className={`w-full rounded-lg shadow text-left ${isDark ? "bg-black text-white" : "bg-white text-black"}`}>
+      <thead>
+        <tr className="bg-[#25be85] text-white">
+          <th className="py-3 px-4 font-semibold text-left">Username</th>
+          <th className="py-3 px-4 font-semibold text-left">Email</th>
+          <th className="py-3 px-4 font-semibold text-left">Login Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        {recentLogins.length === 0 ? (
+          <tr>
+            <td colSpan={3} className="py-4 px-4 text-center text-[#25be85]">{isDark ? <span className="text-white">No recent logins found.</span> : "No recent logins found."}</td>
+          </tr>
+        ) : (
+          recentLogins.map((row, idx) => (
+            <tr key={idx} className="border-b last:border-none">
+              <td className="py-3 px-4">{row.username}</td>
+              <td className="py-3 px-4">{row.email}</td>
+              <td className="py-3 px-4">{row.loginTime}</td>
+            </tr>
+          ))
+        )}
+      </tbody>
+    </table>
+  </div>
+</section>
 
       {/* Section 4: Most Active Users */}
   <section className="w-full mb-10 dark:bg-black dark:text-white">
-        <h2 className="text-2xl font-bold mb-4">Most Active Users</h2>
-        <div className="overflow-x-auto">
-          <table className={`w-full rounded-lg shadow text-left ${isDark ? "bg-black text-white" : "bg-white text-black"}`}>
-            <thead className={isDark ? "bg-[#25be85] text-white" : "bg-[#25be85] text-white"}>
-              <tr>
-                <th className="py-3 px-4">Username</th>
-                <th className="py-3 px-4">Email</th>
-                <th className="py-3 px-4">Login Count</th>
-              </tr>
-            </thead>
-            <tbody>
-              {mostActiveUsers.length === 0 ? (
-                <tr>
-                  <td colSpan={3} className="py-4 px-4 text-center text-[#25be85]">{isDark ? <span className="text-white">No active users found.</span> : "No active users found."}</td>
-                </tr>
-              ) : (
-                mostActiveUsers.map((row, idx) => (
-                  <tr key={idx} className="border-b last:border-none">
-                    <td className="py-3 px-4">{row.username}</td>
-                    <td className="py-3 px-4">{row.email}</td>
-                    <td className="py-3 px-4">{row.count}</td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
-        </div>
-      </section>
+  <h2 className="text-2xl font-bold mb-4">Most Active Users</h2>
+  <div className="overflow-x-auto">
+    <table className={`w-full rounded-lg shadow text-left ${isDark ? "bg-black text-white" : "bg-white text-black"}`}>
+      <thead>
+        <tr className="bg-[#25be85] text-white">
+          <th className="py-3 px-4 font-semibold text-left">Username</th>
+          <th className="py-3 px-4 font-semibold text-left">Email</th>
+          <th className="py-3 px-4 font-semibold text-left">Login Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        {mostActiveUsers.length === 0 ? (
+          <tr>
+            <td colSpan={3} className="py-4 px-4 text-center text-[#25be85]">{isDark ? <span className="text-white">No active users found.</span> : "No active users found."}</td>
+          </tr>
+        ) : (
+          mostActiveUsers.map((row, idx) => (
+            <tr key={idx} className="border-b last:border-none">
+              <td className="py-3 px-4">{row.username}</td>
+              <td className="py-3 px-4">{row.email}</td>
+              <td className="py-3 px-4">{row.count}</td>
+            </tr>
+          ))
+        )}
+      </tbody>
+    </table>
+  </div>
+</section>
       
-      {/* Section 5: Email Domain Stats & Weekly Logins Table */}
-  <section className="w-full mb-10 dark:bg-black dark:text-white">
-        <h2 className="text-2xl font-bold mb-4">{t.emailDomain}</h2>
-        <div className="overflow-x-auto mb-12">
-          <table className={`w-full rounded-lg shadow text-left ${isDark ? "bg-black text-white" : "bg-white text-black"}`}>
-            <thead className={isDark ? "bg-[#25be85] text-white" : "bg-[#25be85] text-white"}>
-              <tr>
-                <th className="py-3 px-4">{t.domain}</th>
-                <th className="py-3 px-4">{t.userCount}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {emailDomains.length === 0 ? (
-                <tr>
-                  <td colSpan={2} className="py-4 px-4 text-center text-[#25be85]">{isDark ? <span className="text-white">{t.noDomain}</span> : t.noDomain}</td>
-                </tr>
-              ) : (
-                emailDomains.map((row, idx) => (
-                  <tr key={idx} className="border-b last:border-none">
-                    <td className="py-3 px-4">{row.domain}</td>
-                    <td className="py-3 px-4">{row.count}</td>
-                  </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+      {/* Charts Section */}
+      <section className="w-full mb-10 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-xl p-8 flex flex-col items-center justify-center">
+          <Bar data={barData} options={barOptions} />
         </div>
-        {/* Weekly Logins Table */}
-        <h2 className="text-2xl font-bold mb-4">{t.loginsWeek}</h2>
-        <div className="overflow-x-auto">
-          <table className={`w-full rounded-lg shadow text-left ${isDark ? "bg-black text-white" : "bg-white text-black"}`}>
-            <thead className={isDark ? "bg-[#25be85] text-white" : "bg-[#25be85] text-white"}>
-              <tr>
-                <th className="py-3 px-4">{t.day}</th>
-                <th className="py-3 px-4">{t.loginCount}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Object.entries(loginData).map(([day, count], idx) => (
-                <tr
-                  key={day}
-                  className={
-                    idx % 2 === 0
-                      ? isDark ? "bg-black text-white" : "bg-white text-black"
-                      : isDark ? "bg-[#25be85] text-white" : "bg-black text-white"
-                  }
-                >
-                  <td className="py-3 px-4 font-semibold">{day}</td>
-                  <td className="py-3 px-4">
-                    <span className="inline-block px-3 py-1 rounded-full bg-[#25be85] text-white font-bold">
-                      {count}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-xl p-8 flex flex-col items-center justify-center">
+          <div style={{ width: "260px", height: "260px" }}>
+            <Pie data={pieData} options={pieOptions} />
+          </div>
         </div>
       </section>
       
@@ -437,3 +440,18 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
+
+// Update loginData for today on successful login
+const loginData = JSON.parse(localStorage.getItem('loginData')) || {
+  Sunday: 0,
+  Monday: 0,
+  Tuesday: 0,
+  Wednesday: 0,
+  Thursday: 0,
+  Friday: 0,
+  Saturday: 0
+};
+const today = new Date();
+const dayName = today.toLocaleDateString('en-US', { weekday: 'long' });
+loginData[dayName] = (loginData[dayName] || 0) + 1;
+localStorage.setItem('loginData', JSON.stringify(loginData));

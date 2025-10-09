@@ -12,23 +12,23 @@ const translations = {
     heroDesc: "Our experienced attorneys provide expert guidance, strategic advocacy, and unwavering commitment to property transactions and real estate matters for individuals and businesses alike.",
     whyTitle: "Why Choose Us for Real Estate Law?",
     features: [
-      "Experienced real estate attorneys",
+      "Well Experienced litigation attorneys are thoroughly prepared",
       "Strategic property transaction support",
       "Guidance through every stage of real estate deals",
       "Proven track record in complex property matters",
-      "Client-focused property solutions",
+      "Client-focused advocacy your goals, our priority, always",
       "Skilled negotiation and contract drafting"
     ],
     processTitle: "How Our Real Estate Law Process Works",
     processDesc: "A step-by-step guide to our approach for resolving real estate matters with clarity and expertise.",
     processSteps: [
-      { title: "Property Evaluation", desc: "We assess your property details and objectives to determine the best legal strategy." },
-      { title: "Document Review", desc: "All relevant property documents and contracts are analyzed to protect your interests." },
-      { title: "Strategy Planning", desc: "We develop a tailored legal strategy for your property transaction or dispute." },
-      { title: "Documentation & Communication", desc: "All filings and communications are handled and you are kept informed at every stage." },
+      { title: "Property Evaluation Details", desc: "We assess your property details and objectives to determine the best legal strategy." },
+      { title: "Documentation and Review", desc: "All relevant property documents and contracts are analyzed to protect your interests." },
+      { title: "Strategy and Planning", desc: "We develop a tailored legal strategy for your property transaction or dispute." },
+      { title: "Documentation & Communication", desc: "All filings and communications are handled and you are informed at every stage." },
       { title: "Negotiation & Transaction", desc: "We pursue favorable outcomes through skilled negotiation and transaction support." },
       { title: "Property Dispute Resolution", desc: "Strong advocacy and representation in property disputes and litigation." },
-      { title: "Resolution & Support", desc: "Achieve resolution and ongoing support for your property needs." }
+      { title: "Resolution & Support", desc: "We must achieve resolution and ongoing support for your property needs." }
     ],
     servicesTitle: "Our Real Estate Law Services",
     services: [

@@ -12,23 +12,23 @@ const translations = {
     heroDesc: "Our compassionate legal team provides expert guidance, mediation, and advocacy for families. We help you navigate sensitive matters with care, clarity, and a focus on peaceful resolutions.",
     whyTitle: "Why Choose Us for Family & Mediation Law?",
     familyFeatures: [
-      "Compassionate family law experts",
-      "Personalized solutions for families",
+      "Compassionate, experienced, dedicated family law experts",
+      "Personalized, innovative solutions for families",
       "Support through every stage of family matters",
-      "Proven results in sensitive cases",
+      "Proven results in sensitive cases and complex cases",
       "Client-focused mediation and advocacy",
       "Skilled negotiation for peaceful resolutions"
     ],
     processTitle: "How Our Family & Mediation Law Process Works",
     processDesc: "A step-by-step guide to our approach for resolving family law matters with care and expertise.",
     processSteps: [
-      { title: "Initial Consultation", desc: "We listen to your family concerns and goals to determine the best approach." },
+      { title: "Initial Consultation and approach", desc: "We listen to your family concerns and goals to determine the best approach." },
       { title: "Information Gathering", desc: "All relevant documents and details are reviewed to understand your situation." },
-      { title: "Strategy & Planning", desc: "We develop a personalized legal or mediation strategy for your family." },
+      { title: "Strategy and Planning", desc: "We develop a personalized legal or mediation strategy for your family." },
       { title: "Documentation & Communication", desc: "All filings and communications are handled with care and transparency." },
       { title: "Negotiation & Mediation", desc: "We pursue peaceful solutions through skilled negotiation and mediation." },
-      { title: "Court Representation", desc: "Strong advocacy and representation in family court if needed." },
-      { title: "Resolution & Support", desc: "Achieve resolution and ongoing support for your family's future." }
+      { title: "Court Representation", desc: "Strong advocacy and representation in family court if needed in the court." },
+      { title: "Resolution & Support", desc: "Achieve resolution, peace, and ongoing support for your family's future." }
     ],
     servicesTitle: "Our Family & Mediation Law Services",
     services: [

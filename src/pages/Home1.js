@@ -61,7 +61,7 @@ const translations = {
     testimonialsDesc: "Hear from our clients about their experiences with our legal team and the results we've achieved together.",
     testimonials: [
       {
-        quote: "“The attorneys at this firm were incredibly knowledgeable and supportive throughout my case. Their dedication led to a successful outcome beyond my expectations.”",
+        quote: "“The attorneys at this firm were incredibly knowledgeable and supportive throughout my case. Their dedication led to a successful outcome”",
         name: "Alexandra P.",
         role: "Business Owner",
         initial: "A"
@@ -259,7 +259,7 @@ const Home1 = () => {
   return (
     <div className="w-screen min-h-screen bg-white dark:bg-black overflow-x-hidden">
       {/* Hero Section */}
-      <section className="relative w-screen h-screen overflow-hidden bg-white dark:bg-black mb-10">
+      <section className="relative w-screen h-screen overflow-hidden bg-white">
         {/* Background Video */}
         <video
           className="absolute inset-0 w-full h-full object-cover"
@@ -309,7 +309,7 @@ const Home1 = () => {
 
       {/* About Us Section */}
       <section className="w-full pt-10 pb-20 bg-gradient-to-br from-[#f8f6f2] to-white dark:from-black dark:to-black px-4 md:px-8 mx-auto">
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-0 items-center px-0 mx-auto">
+        <div className="w-full flex flex-col md:grid md:grid-cols-2 gap-8 md:gap-12 items-center px-0 mx-auto">
           {/* Left: Image */}
           <motion.div
             className="flex flex-col items-center relative w-full"
@@ -319,21 +319,10 @@ const Home1 = () => {
             viewport={{ once: true }}
           >
             <div className="relative mb-6 w-full flex justify-center">
-              <motion.span
-                className="absolute left-1/2 -translate-x-1/2 -top-10 bg-white dark:bg-black text-[#25be85] font-extrabold text-4xl px-8 py-4 rounded-xl shadow-xl border border-[#25be85]"
-                style={{ zIndex: 2 }}
-                initial={{ scale: 0.8, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
-              >
-                {t.aboutYears}
-              </motion.span>
               <motion.img
                 src={require('../images/law-about.jpg')}
                 alt="About Us"
-                className="rounded-3xl shadow-2xl border-4 border-[#25be85] object-cover w-full h-[520px] max-w-none"
+                className="rounded-3xl shadow-2xl border-4 border-[#25be85] object-cover w-full max-w-xl h-[260px] sm:h-[340px] md:h-[480px] lg:h-[600px]"
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.7, delay: 0.3 }}
@@ -344,16 +333,16 @@ const Home1 = () => {
           </motion.div>
           {/* Right: Content */}
           <motion.div
-            className="flex flex-col justify-center px-8 md:px-16 w-full"
-            style={{ height: '520px' }}
+            className="flex flex-col justify-center px-4 md:px-8 w-full"
+            style={{ minHeight: '220px' }}
             initial={{ opacity: 0, x: 60 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
             <span className="uppercase text-base font-semibold text-[#25be85] mb-5 tracking-widest">{t.aboutFirm}</span>
-            <h2 className="text-5xl md:text-3xl font-extrabold text-gray-900 dark:text-white mb-7 leading-tight font-serif">{t.aboutTitle}</h2>
-            <p className="text-lg text-gray-700 dark:text-gray-200 mb-3 font-medium ">
+            <h2 className="text-2xl md:text-3xl lg:text-5xl font-extrabold text-gray-900 dark:text-white mb-5 leading-tight font-serif">{t.aboutTitle}</h2>
+            <p className="text-base md:text-lg text-gray-700 dark:text-gray-200 mb-3 font-medium ">
               {t.aboutDesc}
             </p>
             <ul className="mb-4 list-disc list-inside text-gray-700 dark:text-gray-200">

@@ -13,13 +13,13 @@ const translations = {
     lawServices: [
       {
         img: require('../images/service1.jpg'),
-        title: 'Litigation & Dispute Resolution',
-        desc: 'Expert representation in civil, commercial, and criminal cases. Protecting your rights in and out of court.'
+        title: 'Litigation & Dispute',
+        desc: 'Expert representation in civil, commercial, and criminal cases. Protecting rights in and out of court.'
       },
       {
         img: require('../images/service2.jpg'),
         title: 'Corporate & Commercial Law',
-        desc: 'Business formation, contracts, mergers, acquisitions, and regulatory compliance for companies of all sizes.'
+        desc: 'Business formation, contracts, mergers, acquisitions, and regulatory compliance for all company types.'
       },
       {
         img: require('../images/service3.jpg'),
@@ -610,7 +610,7 @@ const Services = () => {
                 <svg className={`h-6 w-6 transition-transform ${openFaq === idx ? 'rotate-180' : ''} text-[#25be85]`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
               </button>
               {openFaq === idx && (
-                <div className="px-6 pb-5 text-base text-black dark:text-white border-t border-[#25be85]">
+                <div className="px-6 pb-5 text-base text-black dark:text-white">
                   {faq.a}
                 </div>
               )}

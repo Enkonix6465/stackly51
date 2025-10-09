@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
-import image from "../images/law-login.jpg";
+import image from "../images/law-background.jpg";
 const translations = {
   en: {
     // welcome: "Welcome to",
@@ -15,7 +15,7 @@ const translations = {
     firstName: "First Name",
     lastName: "Last Name",
     signUp: "Sign Up",
-    alreadyHave: "Already have an account? Login",
+    alreadyHave: "Already have an account?",
     resetPassword: "Reset Password",
     resetEmail: "Enter your registered email",
     sendReset: "Send Reset Link",
@@ -190,9 +190,15 @@ const Welcome = () => {
           </div>
           {!isForgotPassword ? (
             <>
-              <p className="mb-8 text-lg text-[#0a2342] font-semibold text-center">
-                {t.welcomeBack}
-              </p>
+              <p className="mb-8 text-lg text-black font-semibold text-center">
+  {isLogin
+    ? t.welcomeBack
+    : language === "ar"
+      ? "أنشئ حسابك الجديد للبدء"
+      : language === "he"
+        ? "צור חשבון חדש כדי להתחיל"
+        : "Create your account to get started"}
+</p>
               {isLogin ? (
                 <form onSubmit={handleLoginSubmit} style={styles.form}>
                   <div className="flex items-center gap-4 mb-4">

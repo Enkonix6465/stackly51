@@ -23,7 +23,7 @@ const translations = {
         link: "/blog2"
       },
       {
-        title: "Legal Trends in 2025",
+        title: "Be upadated on Legal Trends in 2025",
         desc: "Stay updated on the latest trends and changes in the legal landscape that impact your business and rights.",
         img: require('../images/blog3.jpg'),
         link: "/blog3"
